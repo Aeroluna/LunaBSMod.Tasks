@@ -1,0 +1,28 @@
+﻿<!--
+  This file is automatically imported by NuGet into a user's project
+  when it targets a single framework, or in classic (pre 2017) csproj projects.
+-->
+<!--<Project TreatAsLocalProperty="BSMTTaskFolder;BSMTTaskAssembly" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="LBSM_GetConfigurationInfo">
+    <PropertyGroup>
+        <LBSMTaskFolder>netstandard2.0</LBSMTaskFolder>
+        <LBSMTaskAssembly>$(MSBuildThisFileDirectory)..\lib\$(LBSMTaskFolder)\LunaBSMod.Tasks.dll</LBSMTaskAssembly>
+    </PropertyGroup>
+
+    <UsingTask TaskName="LunaBSMod.Tasks.GetConfigurationInfo" AssemblyFile="$(LBSMTaskAssembly)" />
+
+    <PropertyGroup>
+        <DebugType>portable</DebugType>
+        <BSMTProjectType>BSIPA</BSMTProjectType>
+        <GenerateManifest>true</GenerateManifest>
+        <AppendGameVersion>true</AppendGameVersion>
+    </PropertyGroup>
+    <PropertyGroup Condition=" $(Configuration.Contains('Release')) ">
+        <Optimize>true</Optimize>
+    </PropertyGroup>
+
+    <ItemDefinitionGroup>
+        <Reference Private="False" />
+        <ProjectReference Private="False" />
+    </ItemDefinitionGroup>
+</Project>

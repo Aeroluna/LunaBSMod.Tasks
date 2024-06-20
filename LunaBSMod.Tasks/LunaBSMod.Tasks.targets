@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project>
+    <Target Name="LBSM_GetConfigurationInfo">
+        <Message Text="Target: LBSM_GetConfigurationInfo" Importance="high" />
+        <GetConfigurationInfo AllConfigurations="$(Configurations)" Configuration="$(Configuration)" >
+            <Output TaskParameter="Constants" PropertyName="GeneratedConstants" />
+            <Output TaskParameter="GameVersion" PropertyName="GeneratedGameVersion" />
+        </GetConfigurationInfo>
+        <PropertyGroup>
+            <DefineConstants>$(DefineConstants);$(GeneratedConstants)</DefineConstants>
+            <GameVersion>$(GeneratedGameVersion)</GameVersion>
+        </PropertyGroup>
+        <Message Text="   Constants= '$(GeneratedConstants)'" Importance="high" />
+        <Message Text="   Game Version= '$(GeneratedGameVersion)'" Importance="high" />
+    </Target>
+</Project>
