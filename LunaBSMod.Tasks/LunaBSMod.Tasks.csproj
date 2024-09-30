@@ -1,31 +1,31 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Version>1.0.0</Version>
-        <Title>LunaBSMod.Tasks</Title>
-        <Authors>Aeroluna</Authors>
-        <Description>Common MSBuild tasks and props for my BS mods.</Description>
-        <Copyright>Copyright © Aeroluna 2024</Copyright>
-        <RepositoryType>git</RepositoryType>
-        <PackageProjectUrl>https://github.com/Aeroluna/LunaBSMod.Tasks</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/Aeroluna/LunaBSMod.Tasks.git</RepositoryUrl>
-        <LangVersion>8</LangVersion>
-        <developmentDependency>true</developmentDependency>
-    </PropertyGroup>
-    
-    <ItemGroup>
-        <Content Include="LunaBSMod.Tasks.props" Pack="true" PackagePath="build\LunaBSMod.Tasks.props" />
-        <Content Include="LunaBSMod.Tasks.targets" Pack="true" PackagePath="build\LunaBSMod.Tasks.targets" />
-    </ItemGroup>
-    
-    <ItemGroup>
-      <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.10.4" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.1.0</Version>
+    <Title>LunaBSMod.Tasks</Title>
+    <Authors>Aeroluna</Authors>
+    <Description>Common MSBuild tasks and props for my BS mods.</Description>
+    <Copyright>Copyright © Aeroluna 2024</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/Aeroluna/LunaBSMod.Tasks</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Aeroluna/LunaBSMod.Tasks.git</RepositoryUrl>
+    <LangVersion>8</LangVersion>
+    <developmentDependency>true</developmentDependency>
+  </PropertyGroup>
 
-    <Target Name="CopyToLocalNuget" AfterTargets="Pack" Condition="'$(ContinuousIntegrationBuild)' != 'True'">
-        <Message Text="Output: '$(OutDir)..\$(AssemblyName).$(PackageVersion).nupkg' -&gt; '$(HOMEDRIVE)$(HOMEPATH)\Nuget\$(AssemblyName)-$(PackageVersion).nupkg'" Importance="high" />
-        <Copy SourceFiles="$(OutDir)..\$(AssemblyName).$(PackageVersion).nupkg" DestinationFiles="$(HOMEDRIVE)$(HOMEPATH)\Nuget\$(AssemblyName).$(PackageVersion).nupkg" />
-    </Target>
+  <ItemGroup>
+    <Content Include="LunaBSMod.Tasks.props" Pack="true" PackagePath="build\LunaBSMod.Tasks.props" />
+    <Content Include="LunaBSMod.Tasks.targets" Pack="true" PackagePath="build\LunaBSMod.Tasks.targets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.10.4" />
+  </ItemGroup>
+
+  <Target Name="CopyToLocalNuget" AfterTargets="Pack" Condition="'$(ContinuousIntegrationBuild)' != 'True'">
+    <Message Text="Output: '$(OutDir)..\$(AssemblyName).$(PackageVersion).nupkg' -&gt; '$(HOMEDRIVE)$(HOMEPATH)\Nuget\$(AssemblyName)-$(PackageVersion).nupkg'" Importance="high" />
+    <Copy SourceFiles="$(OutDir)..\$(AssemblyName).$(PackageVersion).nupkg" DestinationFiles="$(HOMEDRIVE)$(HOMEPATH)\Nuget\$(AssemblyName).$(PackageVersion).nupkg" />
+  </Target>
 </Project>

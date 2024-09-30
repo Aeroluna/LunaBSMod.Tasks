@@ -41,14 +41,12 @@ namespace LunaBSMod.Tasks
                         throw new ArgumentException("Null or whitespace configurations.", nameof(AllConfigurations));
                     }
 
-                    string[] allConfigs = AllConfigurations.Split(new[] { ";" }, StringSplitOptions.None);
-                    Version[] versions = new Version[allConfigs.Length];
-                    for (int i = 0; i < allConfigs.Length; i++)
-                    {
-                        string scoped = allConfigs[i];
-                        versions[i] = new Version(scoped.Substring(scoped.LastIndexOf("-", StringComparison.Ordinal) + 1));
-                    }
-
+                    Version[] versions = AllConfigurations
+                        .Split(new[] { ";" }, StringSplitOptions.None)
+                        .Select(n => n.Substring(n.LastIndexOf("-", StringComparison.Ordinal) + 1))
+                        .Distinct()
+                        .Select(n => new Version(n))
+                        .ToArray();
                     Version latest = versions.Max();
 
                     string versionString = Configuration.Substring(hyphenIndex + 1);
@@ -62,6 +60,12 @@ namespace LunaBSMod.Tasks
                     Constants += $"V{prettyVersion};";
 
                     Version curVersion = new Version(versionString);
+
+                    foreach (Version version in versions.Where(n => n > curVersion))
+                    {
+                        Constants += $"PRE_V{version.ToString().Replace('.', '_').ToUpper()};";
+                    }
+
                     if (curVersion == latest)
                     {
                         Constants += "LATEST;";
